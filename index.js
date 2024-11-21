@@ -71,3 +71,16 @@ bot.catch(err => {
 })
 
 bot.start()
+
+// Создаем сервер Express
+const app = express()
+app.use(express.json())
+
+// Вебхук для бота
+app.use('/webhook', webhookCallback(bot, 'express'))
+
+// Запускаем сервер
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+	console.log(`Сервер запущен на порту ${PORT}`)
+})
